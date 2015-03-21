@@ -1,0 +1,11 @@
+GET:
+curl -i -H "key:dragonteam" http://localhost/laravel/laravel/public/index.php/user
+
+POST:
+curl -i -X POST -d "data[username]=lol&data[password]=lol" -H "key:dragonteam" http://localhost/laravel/laravel/public/index.php/user
+
+PUT:
+curl -i -X PUT -d "data[username]=lol5&data[password]=lol" -H "key:dragonteam" http://localhost/laravel/laravel/public/index.php/user/3
+
+DELETE:
+curl -i -X DELETE -H "key:dragonteam" http://localhost/laravel/laravel/public/index.php/user/3
