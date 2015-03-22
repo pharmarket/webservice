@@ -1,6 +1,10 @@
 Pour un projet ecole
 webservices + divers clients
-
+Instalation :
+- utiliser le dump de la bdd
+- crée son propre ,env ( infos bdd ect)
+- faire le git clone
+enjoy
 
 
 
