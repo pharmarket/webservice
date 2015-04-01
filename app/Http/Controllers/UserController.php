@@ -24,8 +24,8 @@ class UserController extends Controller {
 
 		$where = \Input::get('where');
 
-		if(!empty($where)) { return \App\User::whereRaw($where)->get(); }
-		else{ return \App\User::get(); }
+		if(!empty($where)) { return \User::whereRaw($where)->get(); }
+		else{ return \User::get(); }
 	}
 
 	/**
@@ -37,7 +37,7 @@ class UserController extends Controller {
 	{
 		$data = \Input::get('data');
 
-		\App\User::create($data);
+        \User::create($data);
 	}
 
 	/**
