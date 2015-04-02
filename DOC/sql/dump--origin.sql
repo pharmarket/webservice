@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema pharmarket
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema pharmarket
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `pharmarket` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `pharmarket` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`contact`
+-- Table `pharmarket`.`contact`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`contact` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`contact` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(10) NOT NULL,
@@ -32,9 +32,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`faq`
+-- Table `pharmarket`.`faq`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`faq` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`faq` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question` TEXT(100) NOT NULL,
   `answer` TEXT(500) NOT NULL,
@@ -46,9 +46,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`role`
+-- Table `pharmarket`.`role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`role` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `label` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
@@ -59,9 +59,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`devise`
+-- Table `pharmarket`.`devise`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`devise` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`devise` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(45) NOT NULL,
   `symbole` VARCHAR(5) NOT NULL,
@@ -71,9 +71,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`pays`
+-- Table `pharmarket`.`pays`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pays` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`pays` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `devise_id` INT NOT NULL,
   `nom` VARCHAR(45) NOT NULL,
@@ -81,16 +81,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`pays` (
   INDEX `devise_id_idx` (`devise_id` ASC),
   CONSTRAINT `devise_id`
     FOREIGN KEY (`devise_id`)
-    REFERENCES `mydb`.`devise` (`id`)
+    REFERENCES `pharmarket`.`devise` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ville`
+-- Table `pharmarket`.`ville`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ville` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`ville` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pays_id` INT NOT NULL,
   `nom` VARCHAR(45) NOT NULL,
@@ -102,16 +102,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ville` (
   INDEX `pays_id_idx` (`pays_id` ASC),
   CONSTRAINT `pays_id`
     FOREIGN KEY (`pays_id`)
-    REFERENCES `mydb`.`pays` (`id`)
+    REFERENCES `pharmarket`.`pays` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`user`
+-- Table `pharmarket`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `role_id` INT NOT NULL,
   `ville_id` INT NOT NULL,
@@ -131,21 +131,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`user` (
   INDEX `ville_id_idx` (`ville_id` ASC),
   CONSTRAINT `role_id`
     FOREIGN KEY (`role_id`)
-    REFERENCES `mydb`.`role` (`id`)
+    REFERENCES `pharmarket`.`role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `ville_id`
     FOREIGN KEY (`ville_id`)
-    REFERENCES `mydb`.`ville` (`id`)
+    REFERENCES `pharmarket`.`ville` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`categorie_forum`
+-- Table `pharmarket`.`categorie_forum`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`categorie_forum` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`categorie_forum` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `label` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
@@ -156,9 +156,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`sujets_forum`
+-- Table `pharmarket`.`sujets_forum`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`sujets_forum` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`sujets_forum` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `categorie_id` INT NOT NULL,
   `sujet` VARCHAR(45) NOT NULL,
@@ -166,16 +166,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`sujets_forum` (
   INDEX `categorie_id_idx` (`categorie_id` ASC),
   CONSTRAINT `categorie_id`
     FOREIGN KEY (`categorie_id`)
-    REFERENCES `mydb`.`categorie_forum` (`id`)
+    REFERENCES `pharmarket`.`categorie_forum` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`message_forum`
+-- Table `pharmarket`.`message_forum`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`message_forum` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`message_forum` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `sujet_id` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -187,21 +187,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`message_forum` (
   INDEX `user_id_idx` (`user_id` ASC),
   CONSTRAINT `sujet_id`
     FOREIGN KEY (`sujet_id`)
-    REFERENCES `mydb`.`sujets_forum` (`id`)
+    REFERENCES `pharmarket`.`sujets_forum` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `user_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`id`)
+    REFERENCES `pharmarket`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produit_categorie`
+-- Table `pharmarket`.`produit_categorie`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produit_categorie` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`produit_categorie` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
@@ -212,9 +212,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produit_marque`
+-- Table `pharmarket`.`produit_marque`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produit_marque` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`produit_marque` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
@@ -223,9 +223,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produit`
+-- Table `pharmarket`.`produit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produit` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`produit` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `categorie_id` INT NOT NULL,
   `marque_id` INT NOT NULL,
@@ -239,21 +239,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`produit` (
   INDEX `marque_id_idx` (`marque_id` ASC),
   CONSTRAINT `categorie_id`
     FOREIGN KEY (`categorie_id`)
-    REFERENCES `mydb`.`produit_categorie` (`id`)
+    REFERENCES `pharmarket`.`produit_categorie` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `marque_id`
     FOREIGN KEY (`marque_id`)
-    REFERENCES `mydb`.`produit_marque` (`id`)
+    REFERENCES `pharmarket`.`produit_marque` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`media`
+-- Table `pharmarket`.`media`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`media` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`media` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `produit_id` INT NOT NULL,
   `type` VARCHAR(45) NOT NULL,
@@ -267,16 +267,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`media` (
   INDEX `produit_id_idx` (`produit_id` ASC),
   CONSTRAINT `produit_id`
     FOREIGN KEY (`produit_id`)
-    REFERENCES `mydb`.`produit` (`id`)
+    REFERENCES `pharmarket`.`produit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`posologie_sexe`
+-- Table `pharmarket`.`posologie_sexe`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`posologie_sexe` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`posologie_sexe` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `produit_id` INT NOT NULL,
   `sexe` TINYINT(1) NOT NULL,
@@ -287,16 +287,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`posologie_sexe` (
   INDEX `produit_id_idx` (`produit_id` ASC),
   CONSTRAINT `produit_id`
     FOREIGN KEY (`produit_id`)
-    REFERENCES `mydb`.`produit` (`id`)
+    REFERENCES `pharmarket`.`produit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`posologie_type`
+-- Table `pharmarket`.`posologie_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`posologie_type` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`posologie_type` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `label` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -304,9 +304,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`posologie`
+-- Table `pharmarket`.`posologie`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`posologie` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`posologie` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `produit_id` INT NOT NULL,
   `type_id` INT NOT NULL,
@@ -320,21 +320,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`posologie` (
   INDEX `type_id_idx` (`type_id` ASC),
   CONSTRAINT `produit_id`
     FOREIGN KEY (`produit_id`)
-    REFERENCES `mydb`.`produit` (`id`)
+    REFERENCES `pharmarket`.`produit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `type_id`
     FOREIGN KEY (`type_id`)
-    REFERENCES `mydb`.`posologie_type` (`id`)
+    REFERENCES `pharmarket`.`posologie_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`fournisseur`
+-- Table `pharmarket`.`fournisseur`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`fournisseur` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`fournisseur` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `siret` VARCHAR(14) NULL,
   `nom` VARCHAR(45) NOT NULL,
@@ -351,30 +351,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produit_fournisseur`
+-- Table `pharmarket`.`produit_fournisseur`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produit_fournisseur` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`produit_fournisseur` (
   `produit_id` INT NOT NULL,
   `fournisseur_id` INT NOT NULL,
   INDEX `produit_id_idx` (`produit_id` ASC),
   INDEX `fournisseur_id_idx` (`fournisseur_id` ASC),
   CONSTRAINT `produit_id`
     FOREIGN KEY (`produit_id`)
-    REFERENCES `mydb`.`produit` (`id`)
+    REFERENCES `pharmarket`.`produit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fournisseur_id`
     FOREIGN KEY (`fournisseur_id`)
-    REFERENCES `mydb`.`fournisseur` (`id`)
+    REFERENCES `pharmarket`.`fournisseur` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produit_exemplaire`
+-- Table `pharmarket`.`produit_exemplaire`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produit_exemplaire` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`produit_exemplaire` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `produit_id` INT NOT NULL,
   `reference` VARCHAR(45) NOT NULL,
@@ -382,16 +382,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`produit_exemplaire` (
   INDEX `produit_id_idx` (`produit_id` ASC),
   CONSTRAINT `produit_id`
     FOREIGN KEY (`produit_id`)
-    REFERENCES `mydb`.`produit` (`id`)
+    REFERENCES `pharmarket`.`produit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`panier`
+-- Table `pharmarket`.`panier`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`panier` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`panier` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `token` VARCHAR(45) NOT NULL,
   `added` DATETIME NOT NULL,
@@ -401,9 +401,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`panier_exemplaire`
+-- Table `pharmarket`.`panier_exemplaire`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`panier_exemplaire` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`panier_exemplaire` (
   `panier_id` INT NOT NULL,
   `exemplaire_id` INT NOT NULL,
   `qte` INT NOT NULL DEFAULT 1,
@@ -413,21 +413,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`panier_exemplaire` (
   INDEX `exemplaire_id_idx` (`exemplaire_id` ASC),
   CONSTRAINT `panier_id`
     FOREIGN KEY (`panier_id`)
-    REFERENCES `mydb`.`panier` (`id`)
+    REFERENCES `pharmarket`.`panier` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `exemplaire_id`
     FOREIGN KEY (`exemplaire_id`)
-    REFERENCES `mydb`.`produit_exemplaire` (`id`)
+    REFERENCES `pharmarket`.`produit_exemplaire` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`commande`
+-- Table `pharmarket`.`commande`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`commande` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`commande` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `devise_id` INT NOT NULL,
@@ -441,21 +441,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`commande` (
   INDEX `devise_id_idx` (`devise_id` ASC),
   CONSTRAINT `user_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`id`)
+    REFERENCES `pharmarket`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `devise_id`
     FOREIGN KEY (`devise_id`)
-    REFERENCES `mydb`.`devise` (`id`)
+    REFERENCES `pharmarket`.`devise` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`commande_exemplaire`
+-- Table `pharmarket`.`commande_exemplaire`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`commande_exemplaire` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`commande_exemplaire` (
   `exemplaire_id` INT NOT NULL,
   `commande_id` INT NOT NULL,
   `devise_id` INT NOT NULL,
@@ -466,26 +466,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`commande_exemplaire` (
   INDEX `devsie_id_idx` (`devise_id` ASC),
   CONSTRAINT `commande_id`
     FOREIGN KEY (`commande_id`)
-    REFERENCES `mydb`.`commande` (`id`)
+    REFERENCES `pharmarket`.`commande` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `exemplaire_id`
     FOREIGN KEY (`exemplaire_id`)
-    REFERENCES `mydb`.`produit_exemplaire` (`id`)
+    REFERENCES `pharmarket`.`produit_exemplaire` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `devsie_id`
     FOREIGN KEY (`devise_id`)
-    REFERENCES `mydb`.`devise` (`id`)
+    REFERENCES `pharmarket`.`devise` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`commande_paiement`
+-- Table `pharmarket`.`commande_paiement`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`commande_paiement` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`commande_paiement` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `commande_id` INT NOT NULL,
   `montant` FLOAT NOT NULL,
@@ -494,16 +494,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`commande_paiement` (
   INDEX `commande_id_idx` (`commande_id` ASC),
   CONSTRAINT `commande_id`
     FOREIGN KEY (`commande_id`)
-    REFERENCES `mydb`.`commande` (`id`)
+    REFERENCES `pharmarket`.`commande` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`commande_livraison`
+-- Table `pharmarket`.`commande_livraison`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`commande_livraison` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`commande_livraison` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `commande_id` INT NOT NULL,
   `adresse` VARCHAR(45) NOT NULL,
@@ -514,16 +514,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`commande_livraison` (
   INDEX `commande_id_idx` (`commande_id` ASC),
   CONSTRAINT `commande_id`
     FOREIGN KEY (`commande_id`)
-    REFERENCES `mydb`.`commande` (`id`)
+    REFERENCES `pharmarket`.`commande` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`voip`
+-- Table `pharmarket`.`voip`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`voip` (
+CREATE TABLE IF NOT EXISTS `pharmarket`.`voip` (
   `user_id` INT NOT NULL,
   `operateur_id` INT NOT NULL,
   `durée` INT NULL,
@@ -532,12 +532,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`voip` (
   INDEX `operateur_id_idx` (`operateur_id` ASC),
   CONSTRAINT `user_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`id`)
+    REFERENCES `pharmarket`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `operateur_id`
     FOREIGN KEY (`operateur_id`)
-    REFERENCES `mydb`.`user` (`id`)
+    REFERENCES `pharmarket`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
