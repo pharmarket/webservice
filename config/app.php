@@ -146,7 +146,11 @@ return [
 		'App\Providers\RouteServiceProvider',
 
         'App\Providers\UserServiceProvider',
-
+        'App\Providers\DeviseServiceProvider',
+        'App\Providers\MediaServiceProvider',
+        'App\Providers\PosologieServiceProvider',
+        'App\Providers\Posologie_sexeServiceProvider',
+        'App\Providers\Posologie_typeServiceProvider',
 	],
 
 	/*
@@ -196,6 +200,11 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 
         'User'      => 'App\Facades\User_facades',
+        'Devise'    => 'App\Facades\Devise_facades',
+        'Media'    => 'App\Facades\Media_facades',
+        'Posologie'    => 'App\Facades\Posologie_facades',
+        'Posologie_sexe'    => 'App\Facades\Posologie_sexe_facades',
+        'Posologie_type'    => 'App\Facades\Posologie_type_facades',
 
 	],
 

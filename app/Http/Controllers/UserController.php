@@ -2,15 +2,7 @@
 
 class UserController extends Controller {
 
-	/**
-	 * GHet user by ID
-	 *
-	 * @return Response
-	 */
-	public function show($user)
-	{
-		return $user;
-	}
+	
 
 	/**
 	 * GHet user by ID
@@ -27,6 +19,18 @@ class UserController extends Controller {
 		if(!empty($where)) { return \User::whereRaw($where)->get(); }
 		else{ return \User::get(); }
 	}
+
+
+	/**
+	 * GHet user by ID
+	 *
+	 * @return Response
+	 */
+	public function show($user)
+	{
+		return $user;
+	}
+
 
 	/**
 	 * GHet user by ID

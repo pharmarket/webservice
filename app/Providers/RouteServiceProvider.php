@@ -25,6 +25,11 @@ class RouteServiceProvider extends ServiceProvider {
 		parent::boot($router);
 
 		$router->model('user', 'App\User');
+		$router->model('devise', 'App\Devise');
+		$router->model('media', 'App\Media');
+		$router->model('posologie', 'App\Posologie');
+		$router->model('posologie_sexe', 'App\Posologie_sexe');
+		$router->model('posologie_type', 'App\Posologie_type');
 	}
 
 	/**
