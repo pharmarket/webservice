@@ -33,7 +33,7 @@
 	//Admin : Get / Destroy / Update
 	//Forum : Nan
 
-	Route::resource('contact', 'ContactController', ['only' => ['store', 'destroy', 'update', 'show']]);
+	Route::resource('contact', 'ContactController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
 
 	//Ressource : Produit ( en dev pas officiel)
 	//Front : Get (id // getbycat cat // getbystatus // getbydispo //.... )
