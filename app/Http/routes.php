@@ -10,39 +10,20 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-/**** diminoob routes ***/
-
-//Ressource : User
-//Front : Get / Update / Store
-//Admin : Get / Destroy / Update / Store
-//Forum : Get / Update
-
-
 	Route::resource('user', 'UserController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
-
-
-
-
-
-
-	/**** william routes ***/
-
-	//Ressource : Contact
-	//Front : Store
-	//Admin : Get / Destroy / Update
-	//Forum : Nan
-
-	Route::resource('contact', 'ContactController', ['only' => ['store', 'destroy', 'update', 'show']]);
-
-	//Ressource : Produit ( en dev pas officiel)
-	//Front : Get (id // getbycat cat // getbystatus // getbydispo //.... )
-	//Admin : Get / Destroy / Update
-	//Forum : Get
-
-	Route::resource('produit', 'ProductController', ['only' => ['store', 'destroy', 'update', 'show']]);
-
-	Route::get('getProduitByCat/{cat}', 'ProductController');
-	Route::get('getProduitByStatus/{status}', 'ProductController');
-	Route::get('getProduitByDispo', 'ProductController');
-	Route::get('getProduitByFiltre/{filtres}', 'ProductController');
+	Route::resource('devise', 'DeviseController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('media', 'MediaController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('posologie', 'PosologieController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('posologie_sexe', 'Posologie_sexeController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('posologie_type', 'Posologie_typeController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('categorie_forum', 'Categorie_forumController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('fournisseur', 'FournisseurController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('newletter', 'NewletterController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('faq', 'FaqController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('message_forum', 'Message_forumController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('panier', 'PanierController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('panier_exemplaire', 'Panier_exemplaireController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('pays', 'PaysController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('ville', 'VilleController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('sujet_forum', 'Sujet_forumController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);
+	Route::resource('role', 'RoleController', ['only' => ['store', 'destroy', 'update', 'show', 'index']]);

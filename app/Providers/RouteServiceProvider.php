@@ -25,7 +25,23 @@ class RouteServiceProvider extends ServiceProvider {
 		parent::boot($router);
 
 		$router->model('user', 'App\User');
-		$router->model('contact', 'App\Contact');
+		$router->model('devise', 'App\Devise');
+		$router->model('media', 'App\Media');
+		$router->model('posologie', 'App\Posologie');
+		$router->model('posologie_sexe', 'App\Posologie_sexe');
+		$router->model('posologie_type', 'App\Posologie_type');
+		$router->model('categorie_forum', 'App\Categorie_forum');
+		$router->model('fournisseur', 'App\Fournisseur');
+		$router->model('newletter', 'App\Newletter');
+		$router->model('faq', 'App\Faq');
+		$router->model('message_forum', 'App\Message_forum');
+		$router->model('panier', 'App\Panier');
+		$router->model('panier_exemplaire', 'App\Panier_exemplaire');
+		$router->model('pays', 'App\Pays');
+		$router->model('ville', 'App\Ville');
+		$router->model('role', 'App\Role');
+		$router->model('sujet_forum', 'App\Sujet_forum');
+
 	}
 
 	/**

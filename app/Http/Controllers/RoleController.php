@@ -1,0 +1,117 @@
+<?php namespace App\Http\Controllers;
+
+/***
+**
+**	En cours actuellement, 
+** 	Verif des id dans le store et update
+**
+**/
+
+class RoleController extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		if($role = \Role::get()){
+			return response()->json(['response' => $role], 200);
+		}else{
+			return response()->json('', 400);
+		}
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		$data = \Input::get('data');
+
+		$validator = \Validator::make(
+			$data,
+ 			array(
+				'label' => 'required|max:45',
+				'description' => 'required|max:45'
+			)
+  		);
+
+	  	if($validator->fails()){
+	  		return $validator->errors();
+	  	}
+	  	else{
+
+			if($role = \Role::create($data)){
+				return response()->json(['media' => $role], 200);
+			}
+			else{
+				return response()->json('', 400);
+			}
+		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($role)
+	{
+		return response()->json(['role' => $role], 200);
+	}
+
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($role)
+	{
+		$data = \Input::get('data');
+
+		$validator = \Validator::make(
+			$data,
+ 			array(
+				'label' => 'required|max:45',
+				'description' => 'required|max:45'
+			)
+  		);
+
+	  	if($validator->fails()){
+	  		return $validator->errors();
+	  	}
+	  	else{
+
+			if($role->update($data)){
+				return response()->json(['role' => $role], 200);
+			}
+			else{
+				return response()->json('', 400);
+			}
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($role)
+	{
+		if($role->delete($role)){
+			return response()->json(['role' => $role], 200);
+		}
+		else{
+			return response()->json('', 400);
+		}
+	}
+
+}
